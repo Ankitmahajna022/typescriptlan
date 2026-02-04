@@ -1,0 +1,19 @@
+nav {
+  background: #1e293b;
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 15px;
+  font-weight: 500;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+
