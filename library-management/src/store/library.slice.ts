@@ -10,12 +10,9 @@ interface LibraryState {
 }
 
 const initialState: LibraryState = {
-  books: [
-    { id: "1", title: "Clean Code", author: "Robert Martin", available: true },
-    { id: "2", title: "You Don't Know JS", author: "Kyle Simpson", available: true }
-  ],
+  books: [],
   issuedBooks: [],
-  members: [{ id: "m1", name: "Ankit", email: "ankit@gmail.com" }]
+  members: []
 };
 
 const librarySlice = createSlice({
@@ -31,14 +28,14 @@ const librarySlice = createSlice({
       });
     },
 
-    updateBook(state, action: PayloadAction<Book>) {
+    updateBooks(state, action: PayloadAction<Book>) {
       const index = state.books.findIndex(b => b.id === action.payload.id);
       if (index !== -1) {
         state.books[index] = action.payload;
       }
     },
 
-    deleteBook(state, action: PayloadAction<{ bookId: string }>) {
+    deleteBooks(state, action: PayloadAction<{ bookId: string }>) {
       state.books = state.books.filter(b => b.id !== action.payload.bookId);
       state.issuedBooks = state.issuedBooks.filter(
         i => i.bookId !== action.payload.bookId
@@ -54,14 +51,14 @@ const librarySlice = createSlice({
       });
     },
 
-    updateMember(state, action: PayloadAction<Member>) {
+    updateMembers(state, action: PayloadAction<Member>) {
       const index = state.members.findIndex(m => m.id === action.payload.id);
       if (index !== -1) {
         state.members[index] = action.payload;
       }
     },
 
-    deleteMember(state, action: PayloadAction<{ memberId: string }>) {
+    deleteMembers(state, action: PayloadAction<{ memberId: string }>) {
       state.members = state.members.filter(
         m => m.id !== action.payload.memberId
       );
@@ -124,11 +121,11 @@ const librarySlice = createSlice({
 
 export const {
   addBook,
-  updateBook,
-  deleteBook,
+  updateBooks,
+  deleteBooks,
   addMember,
-  updateMember,
-  deleteMember,
+  updateMembers,
+  deleteMembers,
   issueBook,
   returnBook
 } = librarySlice.actions;
