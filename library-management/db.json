@@ -1,0 +1,24 @@
+{
+  "books": [
+    {
+      "id": "1",
+      "title": "Clean Code",
+      "author": "Robert Martin",
+      "available": true
+    },
+    {
+      "id": "2",
+      "title": "You Don't Know JS",
+      "author": "Kyle Simpson",
+      "available": true
+    }
+  ],
+  "members": [
+    {
+      "id": "m1",
+      "name": "Ankit",
+      "email": "ankit@gmail.com"
+    }
+  ],
+  "issuedBooks": []
+}

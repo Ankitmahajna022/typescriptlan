@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store";
 
-export default function () {
+export default function Members() {
     const members = useSelector((state: RootState) => state.members)
 
 

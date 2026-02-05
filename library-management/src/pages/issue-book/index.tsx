@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState, AppDispatch } from "../../store";
-import { issueBooks } from "../../store/library.slice";
+import { issueBook } from "../../store/library.slice";
 
 export default function IssueBook() {
     const dispatch = useDispatch<AppDispatch>();
@@ -8,7 +8,7 @@ export default function IssueBook() {
     const members = useSelector((state: RootState) => state.members)
 
     const handleIssue = () => {
-        dispatch(issueBooks({
+        dispatch(issueBook({
             bookId: books[0].id,
             memberId: members[0].id
         }));
