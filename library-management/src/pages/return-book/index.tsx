@@ -7,7 +7,9 @@ export default function ReturnBook() {
   const { data: issues = [], isLoading } = useIssuedBooks();
   const returnBookMutation = useReturnBook();
 
-  const { books, members } = useSelector((state: RootState) => state);
+  const books = useSelector((state: RootState) => state.books);
+  const members = useSelector((state: RootState) => state.members);
+
 
   if (isLoading) return <p>Loading...</p>;
 
