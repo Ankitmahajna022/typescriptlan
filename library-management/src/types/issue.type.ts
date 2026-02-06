@@ -5,5 +5,5 @@ export interface IssueBook{
   issueDate: number;
   dueDate: string;
   returnDate?: string;
-  fine: number;
+  fine?: number;
 }

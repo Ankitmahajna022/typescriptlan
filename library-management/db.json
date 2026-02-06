@@ -17,12 +17,6 @@
       "title": "Animal Farm",
       "author": "George Orwell",
       "available": true
-    },
-    {
-      "id": "3afd",
-      "title": "1984",
-      "author": "George Orwell",
-      "available": true
     }
   ],
   "members": [
@@ -64,6 +58,24 @@
       "dueDate": "2026-02-13T10:45:51.843Z",
       "fine": 0,
       "returnDate": "2026-02-06T10:46:46.030Z"
+    },
+    {
+      "id": "a493",
+      "bookId": "4070",
+      "memberId": "bd03",
+      "issueDate": "2026-02-06T10:56:11.469Z",
+      "dueDate": "2026-02-13T10:56:11.469Z",
+      "fine": 0,
+      "returnDate": "2026-02-06T10:56:37.862Z"
+    },
+    {
+      "id": "4379",
+      "bookId": "4070",
+      "memberId": "bd03",
+      "issueDate": "2026-02-06T11:12:18.071Z",
+      "dueDate": "2026-02-13T11:12:18.071Z",
+      "fine": 0,
+      "returnDate": "2026-02-06T11:12:22.084Z"
     }
   ]
 }
