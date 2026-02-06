@@ -1,19 +1,38 @@
-import { useSelector } from "react-redux";
-import type { RootState } from "../../store";
+import { Link } from "react-router-dom"
+import { useMembers, useDeleteMembers } from "../../hooks/useLibraryQueries"
 
 export default function Members() {
-    const members = useSelector((state: RootState) => state.members)
+    const { data: members } = useMembers();
+    const deleteMember = useDeleteMembers();
 
 
     return (
 
-        <div style={{ padding: 20 }}>
-            <h2>Members</h2>
-            {members.map(member => (
-                <div key={member.id}>
-                    <p>{member.name} - {member.email}</p>
-                </div>
-            ))}
+        <div>
+            <Link to="/members/add">Add Member</Link>
+
+            <table border={1} cellPadding={10}>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {members?.map(m => (
+                        <tr key={m.id}>
+                            <td>{m.name}</td>
+                            <td>{m.email}</td>
+                            <td>
+                                <Link to={`/members/edit/${m.id}`}>Edit</Link>
+                                <button onClick={() => deleteMember.mutate(m.id)}>Delete</button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
     )
 }

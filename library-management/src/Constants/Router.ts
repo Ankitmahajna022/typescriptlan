@@ -1,15 +1,23 @@
-export const ROUTE={
-    DASHBOARD:"/",
-    BOOKS:{
-        BOOKS:"/books"
-    },
-    MEMBERS:{
-        MEMBERS:"/members"
-    },
-    ISSUEBOOKS:{
-        ISSUEBOOK:"/issue-book"
-    },
-    RETURNBOOK:{
-        RETURNBOOK:"/return-book"
-    }
-}
+export const ROUTE = {
+  DASHBOARD: "/",
+
+  BOOKS: {
+    LIST: "/books",
+    ADD: "/books/add",
+    EDIT: "/books/edit/:id"
+  },
+
+  MEMBERS: {
+    LIST: "/members",
+    ADD: "/members/add",
+    EDIT: "/members/edit/:id"
+  },
+
+  ISSUEBOOKS: {
+    ISSUE: "/issue-book"
+  },
+
+  RETURNBOOK: {
+    RETURN: "/return-book"
+  }
+};

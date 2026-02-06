@@ -5,6 +5,10 @@ import ReturnBook from "../pages/return-book";
 import Members from "../pages/members";
 
 import{ROUTE} from "../Constants/Router"
+import AddBook from "../pages/books/AddBook";
+import EditBook from "../pages/books/EditBook";
+import AddMember from "../pages/members/AddMember";
+import EditMember from "../pages/members/EditMember";
 
 
 export const PageRoutes=[
@@ -13,19 +17,35 @@ export const PageRoutes=[
         element:<Dashboard/>
     },
     {
-        path:ROUTE.BOOKS.BOOKS,
+        path:ROUTE.BOOKS.LIST,
         element:<Books/>
     },
     {
-        path:ROUTE.MEMBERS.MEMBERS,
+         path:ROUTE.BOOKS.ADD,
+        element:<AddBook/>
+    },
+    {
+         path:ROUTE.BOOKS.EDIT,
+        element:<EditBook/>
+    },
+    {
+        path:ROUTE.MEMBERS.LIST,
         element:<Members/>
     },
     {
-        path:ROUTE.ISSUEBOOKS.ISSUEBOOK,
+         path:ROUTE.MEMBERS.ADD,
+        element:<AddMember/>
+    },
+    {
+         path:ROUTE.MEMBERS.EDIT,
+        element:<EditMember/>
+    },
+    {
+        path:ROUTE.ISSUEBOOKS.ISSUE,
         element:<IssueBook/>
     },
     {
-        path:ROUTE.RETURNBOOK.RETURNBOOK,
+        path:ROUTE.RETURNBOOK.RETURN,
         element:<ReturnBook/>
     }
 ]

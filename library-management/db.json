@@ -1,24 +1,69 @@
 {
   "books": [
     {
-      "id": "1",
-      "title": "Clean Code",
-      "author": "Robert Martin",
+      "id": "4070",
+      "title": "Pride and Prejudice",
+      "author": "Jane Austen",
       "available": true
     },
     {
-      "id": "2",
-      "title": "You Don't Know JS",
-      "author": "Kyle Simpson",
+      "id": "d002",
+      "title": "Emma",
+      "author": "Jane Austen",
+      "available": true
+    },
+    {
+      "id": "aa8c",
+      "title": "Animal Farm",
+      "author": "George Orwell",
+      "available": true
+    },
+    {
+      "id": "3afd",
+      "title": "1984",
+      "author": "George Orwell",
       "available": true
     }
   ],
   "members": [
     {
-      "id": "m1",
+      "id": "bd03",
       "name": "Ankit",
       "email": "ankit@gmail.com"
+    },
+    {
+      "id": "3fa1",
+      "name": "Raj",
+      "email": "Raj@gmail.com"
     }
   ],
-  "issuedBooks": []
+  "issuedBooks": [
+    {
+      "id": "471f",
+      "bookId": "4070",
+      "memberId": "bd03",
+      "issueDate": "2026-02-06T10:29:36.748Z",
+      "dueDate": "2026-02-13T10:29:36.748Z",
+      "fine": 0,
+      "returnDate": "2026-02-06T10:45:40.481Z"
+    },
+    {
+      "id": "7fda",
+      "bookId": "aa8c",
+      "memberId": "3fa1",
+      "issueDate": "2026-02-06T10:40:46.949Z",
+      "dueDate": "2026-02-13T10:40:46.949Z",
+      "fine": 0,
+      "returnDate": "2026-02-06T10:45:41.745Z"
+    },
+    {
+      "id": "f1b8",
+      "bookId": "4070",
+      "memberId": "bd03",
+      "issueDate": "2026-02-06T10:45:51.843Z",
+      "dueDate": "2026-02-13T10:45:51.843Z",
+      "fine": 0,
+      "returnDate": "2026-02-06T10:46:46.030Z"
+    }
+  ]
 }

@@ -1,7 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { Book, IssueBook, Member } from "../types";
 
-const FINE_PER_DAY = 10;
 
 interface LibraryState {
   books: Book[];
@@ -21,6 +20,20 @@ const librarySlice = createSlice({
   reducers: {
 
 
+    //set api 
+    setBooks(state, action: PayloadAction<Book[]>) {
+      state.books = action.payload;
+    },
+
+    setMembers(state, action: PayloadAction<Member[]>) {
+      state.members = action.payload;
+    },
+
+    setIssuedBooks(state, action: PayloadAction<IssueBook[]>) {
+      state.issuedBooks = action.payload;
+    },
+
+
     addBook(state, action: PayloadAction<Omit<Book, "id">>) {
       state.books.push({
         id: crypto.randomUUID(),
@@ -35,10 +48,13 @@ const librarySlice = createSlice({
       }
     },
 
-    deleteBooks(state, action: PayloadAction<{ bookId: string }>) {
-      state.books = state.books.filter(b => b.id !== action.payload.bookId);
+    deleteBooks(state, action: PayloadAction<string>) {
+      state.books = state.books.filter(
+        b => b.id !== action.payload
+      );
+
       state.issuedBooks = state.issuedBooks.filter(
-        i => i.bookId !== action.payload.bookId
+        i => i.bookId !== action.payload
       );
     },
 
@@ -58,14 +74,16 @@ const librarySlice = createSlice({
       }
     },
 
-    deleteMembers(state, action: PayloadAction<{ memberId: string }>) {
+    deleteMembers(state, action: PayloadAction<string>) {
       state.members = state.members.filter(
-        m => m.id !== action.payload.memberId
+        m => m.id !== action.payload
       );
+
       state.issuedBooks = state.issuedBooks.filter(
-        i => i.memberId !== action.payload.memberId
+        i => i.memberId !== action.payload
       );
     },
+
 
 
 
@@ -76,50 +94,52 @@ const librarySlice = createSlice({
       const book = state.books.find(b => b.id === action.payload.bookId);
       if (!book || !book.available) return;
 
-      const memberExists = state.members.some(
-        m => m.id === action.payload.memberId
-      );
-      if (!memberExists) return;
-
-      const issueDate = new Date();
-      const dueDate = new Date();
-      dueDate.setDate(issueDate.getDate() + 7);
-
       state.issuedBooks.push({
         id: crypto.randomUUID(),
         bookId: action.payload.bookId,
         memberId: action.payload.memberId,
-        issueDate: issueDate.toISOString(),
-        dueDate: dueDate.toISOString(),
+        issueDate: new Date().getDate(),
+        dueDate: new Date(Date.now() + 7 * 86400000).toISOString(),
         fine: 0
       });
 
       book.available = false;
     },
 
-    returnBook(state, action: PayloadAction<{ issueId: string }>) {
-      const issue = state.issuedBooks.find(i => i.id === action.payload.issueId);
-      if (!issue) return;
+    returnBook(state, action: PayloadAction<string>) {
+      const issueIndex = state.issuedBooks.findIndex(
+        i => i.id === action.payload
+      );
+
+      if (issueIndex === -1) return;
+
+      const issue = state.issuedBooks[issueIndex];
 
       const today = new Date();
-      const due = new Date(issue.dueDate);
+      const dueDate = new Date(issue.dueDate);
 
-      if (today > due) {
+
+      if (today > dueDate) {
         const diffDays = Math.ceil(
-          (today.getTime() - due.getTime()) / (1000 * 60 * 60 * 24)
+          (today.getTime() - dueDate.getTime()) / (1000 * 60 * 60 * 24)
         );
-        issue.fine = diffDays * FINE_PER_DAY;
+        issue.fine = diffDays * 10;
       }
-
-      issue.returnDate = today.toISOString();
 
       const book = state.books.find(b => b.id === issue.bookId);
       if (book) book.available = true;
+
+
+      state.issuedBooks.splice(issueIndex, 1);
     }
+
   }
 });
 
 export const {
+  setBooks,
+  setIssuedBooks,
+  setMembers,
   addBook,
   updateBooks,
   deleteBooks,

@@ -1,53 +1,47 @@
-import { useSelector, useDispatch } from "react-redux"
-import type { RootState, AppDispatch } from "../../store"
-import BookCard from "../../components/book/BookCard"
-import { addBook } from "../../store/library.slice"
-import { useState } from "react"
+import {useBooks,usedeleteBooks} from "../../hooks/useLibraryQueries"
+import { Link } from "react-router-dom"
 
-export default function Books() {
-  const dispatch=useDispatch<AppDispatch>()
-  const books = useSelector((state: RootState) => state.books)
 
-  const [title,setTitle]=useState("")
-  const [author,setAuthor]=useState("")
+export default function BooksPage(){
+    const  {data:books,isLoading}=useBooks()
+    const deleteBook=usedeleteBooks()
+    
 
-  const handleAdd=()=>{
-    dispatch(
-      addBook({
-        title,
-        author,
-        available:true
-      })
+
+     if (isLoading) return <p>Loading books...</p>;
+
+
+    return(
+        <div>
+            <h2>Books</h2>
+            <Link to="/books/add">Add Book</Link>
+
+            <table border={1} cellPadding={10}>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>    
+         <tbody>
+          {books?.map(book => (
+            <tr key={book.id}>
+              <td>{book.title}</td>
+              <td>{book.author}</td>
+              <td>{book.available ? "Available" : "Issued"}</td>
+              <td>
+                <Link to={`/books/edit/${book.id}`}>Edit</Link>
+                <button  style={{marginLeft:5}}onClick={() => deleteBook.mutate(book.id)}>
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+            
+        </div>
     )
-    setTitle("")
-    setAuthor("")
-  }
-
-  return (
-    <div style={{padding:20}}>
-      <h2>Books</h2>
-
-      <div style={{ marginBottom: 20 }}>
-        <input
-          placeholder="Title"
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-        />
-        <input
-          placeholder="Author"
-          value={author}
-          onChange={e => setAuthor(e.target.value)}
-          style={{ marginLeft: 10 }}
-        />
-        <button onClick={handleAdd} style={{ marginLeft: 10 }}>
-          Add Book
-        </button>
-      </div>
-
-      {books.map(book => (
-        <BookCard key={book.id} book={book} />
-      ))}
-    </div>
-
-  )
 }
