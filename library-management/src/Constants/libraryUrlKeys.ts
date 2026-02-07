@@ -1,23 +1,20 @@
-export const LIBRARY_URL_KEYS = {
+export const KEYS = {
   BOOKS: {
-    ALL: "/books",
-    ONE: "/books/",          
+    ALL: "/books",       
     ADD: "/books",
     UPDATE: "/books/",       
     DELETE: "/books/",       
   },
 
   MEMBERS: {
-    ALL: "/members",
-    ONE: "/members/",       
+    ALL: "/members",      
     ADD: "/members",
     UPDATE: "/members/",     
     DELETE: "/members/",     
   },
 
   ISSUED_BOOKS: {
-    ALL: "/issuedBooks",
-    ONE: "/issuedBooks/",   
+    ALL: "/issuedBooks",  
     ISSUE: "/issuedBooks",
     RETURN: "/issuedBooks/", 
   },
