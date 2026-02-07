@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
+import { useQuery, useMutation, useQueryClient  } from "@tanstack/react-query"
 import { useDispatch } from "react-redux"
 import type { AppDispatch } from "../store"
 import { 
@@ -47,32 +47,46 @@ export const useBooks = () => {
 }
 
 export const useCreateBooks = () => {
-    const dispatch = useDispatch<AppDispatch>()
+    const dispatch = useDispatch<AppDispatch>();
+  const queryClient = useQueryClient();
 
-    return useMutation({
-        mutationFn: createBook,
-        onSuccess: book => dispatch(addBook(book))
-    });
+  return useMutation({
+    mutationFn: createBook,
+    onSuccess: book => {
+      dispatch(addBook(book));
+      queryClient.invalidateQueries({ queryKey: ["books"] });
+    },
+  });
+  
 
 }
 
 export const useUpdateBooks = () => {
-    const dispatch = useDispatch<AppDispatch>()
+    const dispatch = useDispatch<AppDispatch>();
+  const queryClient = useQueryClient();
 
-    return useMutation({
-        mutationFn:updateBook,
-        onSuccess:book=>dispatch(updateBooks(book))
-    });
+  return useMutation({
+    mutationFn: updateBook,
+    onSuccess: book => {
+      dispatch(updateBooks(book));
+      queryClient.invalidateQueries({ queryKey: ["books"] });
+    },
+  });
 
 }
 
 export const usedeleteBooks=()=>{
-    const dispatch=useDispatch<AppDispatch>()
+    const dispatch = useDispatch<AppDispatch>();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: deleteBook,
+    onSuccess: (_, bookId) => {
+      dispatch(deleteBooks(bookId));
+      queryClient.invalidateQueries({ queryKey: ["books"] });
+    },
+  });
     
-    return useMutation({
-        mutationFn:deleteBook,
-        onSuccess:(_, bookId)=>dispatch(deleteBooks(bookId))
-    })
 }
 
 
@@ -92,30 +106,42 @@ export const useMembers=()=>{
 }
 
 export const useCreateMembers=()=>{
-    const dispatch=useDispatch<AppDispatch>()
+   const dispatch = useDispatch<AppDispatch>();
+  const queryClient = useQueryClient();
 
-    return useMutation({
-        mutationFn:createMember,
-        onSuccess:member=>dispatch(addMember(member))
-    });
+  return useMutation({
+    mutationFn: createMember,
+    onSuccess: member => {
+      dispatch(addMember(member));
+      queryClient.invalidateQueries({ queryKey: ["members"] });
+    },
+  });
 }
 
 export const useUpdateMembers=()=>{
-    const dispatch=useDispatch<AppDispatch>()
+     const dispatch = useDispatch<AppDispatch>();
+  const queryClient = useQueryClient();
 
-    return useMutation({
-        mutationFn:updateMember,
-        onSuccess:member=>dispatch(updateMembers(member))
-    })
+  return useMutation({
+    mutationFn: updateMember,
+    onSuccess: member => {
+      dispatch(updateMembers(member));
+      queryClient.invalidateQueries({ queryKey: ["members"] });
+    },
+  });
 }
 
 export const useDeleteMembers=()=>{
-    const dispatch=useDispatch<AppDispatch>()
-   
-    return useMutation({
-        mutationFn:deleteMember,
-        onSuccess:(_,memberId)=>dispatch(deleteMembers(memberId))
-    })
+   const dispatch = useDispatch<AppDispatch>();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: deleteMember,
+    onSuccess: (_, memberId) => {
+      dispatch(deleteMembers(memberId));
+      queryClient.invalidateQueries({ queryKey: ["members"] });
+    },
+  });
 }
 
 //ISSUE / RETURN...!

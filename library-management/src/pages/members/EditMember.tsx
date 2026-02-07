@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../../store";
 import { useUpdateMembers } from "../../hooks/useLibraryQueries";
 import { useState } from "react";
+import { ROUTE } from "../../Constants/Router";
 
 export default function EditMember() {
   const { id } = useParams<{ id: string }>();
@@ -14,16 +15,15 @@ export default function EditMember() {
       state.members.find(m => m.id === id)
   );
 
-  const [name, setName] = useState(member?.name || "");
-  const [email, setEmail] = useState(member?.email || "");
+  const [value, setValue] = useState({ name: member?.name || "",email: member?.email || ""});
 
   if (!member) return <p>Member not found</p>;
 
   const submit = () => {
     updateMember.mutate(
-      { id: member.id, name, email },
+      { id: member.id, ...value },
       {
-        onSuccess: () => navigate("/members")
+        onSuccess: () => navigate(ROUTE.MEMBERS.LIST)
       }
     );
   };
@@ -33,13 +33,13 @@ export default function EditMember() {
       <h2>Edit Member</h2>
 
       <input
-        value={name}
-        onChange={e => setName(e.target.value)}
+        value={value.name}
+        onChange={e => setValue({...value,name:e.target.value})}
       />
 
       <input
-        value={email}
-        onChange={e => setEmail(e.target.value)}
+        value={value.email}
+        onChange={e => setValue({...value, email: e.target.value})}
       />
 
       <button onClick={submit}>Update</button>

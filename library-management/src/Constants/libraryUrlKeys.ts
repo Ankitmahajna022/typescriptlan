@@ -1,21 +1,17 @@
 export const KEYS = {
   BOOKS: {
-    ALL: "/books",       
-    ADD: "/books",
-    UPDATE: "/books/",       
-    DELETE: "/books/",       
+    BOOKS: "/books",       
+    BOOK: "/books/",       
+       
   },
 
   MEMBERS: {
-    ALL: "/members",      
-    ADD: "/members",
-    UPDATE: "/members/",     
-    DELETE: "/members/",     
+    MEMBERS: "/members",      
+    MEMBER: "/members/",       
   },
 
   ISSUED_BOOKS: {
-    ALL: "/issuedBooks",  
-    ISSUE: "/issuedBooks",
+    ISSUED: "/issuedBooks",  
     RETURN: "/issuedBooks/", 
   },
 };

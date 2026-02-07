@@ -11,7 +11,11 @@ export default function Dashboard() {
     useIssuedBooks();
 
   if (booksLoading || membersLoading || issuedLoading) {
-    return <h3>Loading dashboard...</h3>;
+    return (
+      <div className="flex items-center justify-center h-40 text-gray-500">
+        Loading dashboard...
+      </div>
+    );
   }
 
   const totalBooks = books.length;
@@ -20,15 +24,44 @@ export default function Dashboard() {
   const totalIssued = issuedBooks.filter(i => !i.returnDate).length;
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2>📊 Dashboard</h2>
+    <div className="p-6">
+      <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+        📊 Dashboard
+      </h2>
 
-      <ul>
-        <li>Total Books: <strong>{totalBooks}</strong></li>
-        <li>Available Books: <strong>{availableBooks}</strong></li>
-        <li>Total Members: <strong>{totalMembers}</strong></li>
-        <li>Issued Books: <strong>{totalIssued}</strong></li>
-      </ul>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Total Books */}
+        <div className="bg-white rounded-lg shadow p-5 border-l-4 border-blue-500">
+          <p className="text-sm text-gray-500">Total Books</p>
+          <p className="text-3xl font-bold text-gray-800">
+            {totalBooks}
+          </p>
+        </div>
+
+        {/* Available Books */}
+        <div className="bg-white rounded-lg shadow p-5 border-l-4 border-green-500">
+          <p className="text-sm text-gray-500">Available Books</p>
+          <p className="text-3xl font-bold text-gray-800">
+            {availableBooks}
+          </p>
+        </div>
+
+        {/* Total Members */}
+        <div className="bg-white rounded-lg shadow p-5 border-l-4 border-purple-500">
+          <p className="text-sm text-gray-500">Total Members</p>
+          <p className="text-3xl font-bold text-gray-800">
+            {totalMembers}
+          </p>
+        </div>
+
+        {/* Issued Books */}
+        <div className="bg-white rounded-lg shadow p-5 border-l-4 border-red-500">
+          <p className="text-sm text-gray-500">Issued Books</p>
+          <p className="text-3xl font-bold text-gray-800">
+            {totalIssued}
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
